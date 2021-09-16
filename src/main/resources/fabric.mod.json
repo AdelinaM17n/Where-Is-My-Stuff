@@ -9,7 +9,7 @@
     "Maheesha"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
+    "homepage": "",
     "sources": "https://github.com/MaheEvil/Where-Is-My-Stuff"
   },
 
@@ -32,6 +32,6 @@
     "java": ">=16"
   },
   "suggests": {
-    "another-mod": "*"
+    "another-mod": "CutefulMod by SRAZKVT"
   }
 }
