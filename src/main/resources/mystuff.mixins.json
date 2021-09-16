@@ -6,7 +6,7 @@
   "mixins": [
   ],
   "client": [
-    "io.github.maheevil.mixin.DeathScreenMixin"
+    "DeathScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
