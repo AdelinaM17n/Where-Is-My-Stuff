@@ -5,6 +5,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.DeathScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,6 +18,8 @@ import java.util.List;
 @Mixin(DeathScreen.class)
 public class DeathScreenMixin extends Screen {
     @Shadow @Final private List<Button> exitButtons;
+
+    @Shadow @Final private boolean hardcore;
 
     protected DeathScreenMixin(Component component) {
         super(component);
@@ -35,10 +38,12 @@ public class DeathScreenMixin extends Screen {
     public void render(PoseStack poseStack, int i, int j, float f, CallbackInfo ci){
         assert this.minecraft != null;
         assert this.minecraft.player != null;
-        System.out.println(this.height);
+        //System.out.println(this.height);
         String xyz = "[X: " + minecraft.player.blockPosition().getX() + "/ Y: " + minecraft.player.blockPosition().getY() + "/ Z: " + minecraft.player.blockPosition().getZ() + "]";
         String zyx = "XYZ: " + this.minecraft.player.blockPosition().getX() + " / " + minecraft.player.blockPosition().getY() + " / " + minecraft.player.blockPosition().getZ();
         drawCenteredString(poseStack,this.font, xyz, this.width / 2, this.height - this.height / 5, 16777215);
 
     }
+
+
 }
