@@ -19,15 +19,12 @@ import java.util.List;
 public class DeathScreenMixin extends Screen {
     @Shadow @Final private List<Button> exitButtons;
 
-    @Shadow @Final private boolean hardcore;
-
     protected DeathScreenMixin(Component component) {
         super(component);
     }
 
     @Inject(
             method = "render",
-            //at = @At("HEAD"),
             at = @At(
                     value = "INVOKE",
                     shift = At.Shift.BEFORE,
@@ -38,12 +35,24 @@ public class DeathScreenMixin extends Screen {
     public void render(PoseStack poseStack, int i, int j, float f, CallbackInfo ci){
         assert this.minecraft != null;
         assert this.minecraft.player != null;
-        //System.out.println(this.height);
         String xyz = "[X: " + minecraft.player.blockPosition().getX() + "/ Y: " + minecraft.player.blockPosition().getY() + "/ Z: " + minecraft.player.blockPosition().getZ() + "]";
-        String zyx = "XYZ: " + this.minecraft.player.blockPosition().getX() + " / " + minecraft.player.blockPosition().getY() + " / " + minecraft.player.blockPosition().getZ();
-        drawCenteredString(poseStack,this.font, xyz, this.width / 2, this.height - this.height / 5, 16777215);
-
+        drawCenteredString(poseStack,this.font, xyz, this.width / 2, this.height / 4 + 145, 16777215);
     }
 
-
+    @Inject(
+            method = "init",
+            at = @At(
+                    value = "INVOKE",
+                    shift = At.Shift.BEFORE,
+                    target = "net/minecraft/client/gui/components/Button.<init>(IIIILnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)V"
+            )
+    )
+    protected void init(CallbackInfo ci){
+        assert minecraft != null;
+        assert minecraft.player != null;
+        String xyz =  minecraft.player.blockPosition().getX() + " / " + minecraft.player.blockPosition().getY() + " / " + minecraft.player.blockPosition().getZ();
+        this.exitButtons.add(this.addRenderableWidget(new Button(this.width / 2 - 100, this.height / 4 + 120, 200, 20, new TranslatableComponent("Copy Location To Clipboard"), (buttonx) -> {
+            this.minecraft.keyboardHandler.setClipboard(xyz);
+        })));
+    }
 }
