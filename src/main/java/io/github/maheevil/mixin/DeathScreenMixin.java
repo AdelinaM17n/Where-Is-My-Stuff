@@ -29,8 +29,7 @@ public class DeathScreenMixin extends Screen {
                     value = "INVOKE",
                     shift = At.Shift.BEFORE,
                     target = "net/minecraft/client/gui/screens/Screen.render(Lcom/mojang/blaze3d/vertex/PoseStack;IIF)V"
-            ),
-            cancellable = true
+            )
     )
     public void render(PoseStack poseStack, int i, int j, float f, CallbackInfo ci){
         assert this.minecraft != null;
