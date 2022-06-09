@@ -49,6 +49,9 @@ public class DeathScreenMixin extends Screen {
         assert minecraft != null;
         assert minecraft.player != null;
         String xyz =  minecraft.player.blockPosition().getX() + " / " + minecraft.player.blockPosition().getY() + " / " + minecraft.player.blockPosition().getZ();
-        this.exitButtons.add(this.addRenderableWidget(new Button(this.width / 2 - 100, this.height / 4 + 120, 200, 20, Component.literal("Copy Location To Clipboard"), (buttonx) -> this.minecraft.keyboardHandler.setClipboard(xyz))));
+        this.exitButtons.add(
+                this.addRenderableWidget(
+                        new Button(this.width / 2 - 100, this.height / 4 + 120, 200, 20, Component.literal("Copy Location To Clipboard"),
+                        (buttonx) -> this.minecraft.keyboardHandler.setClipboard(xyz))));
     }
 }
