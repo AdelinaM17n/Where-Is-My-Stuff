@@ -15,9 +15,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(DeathScreen.class)
-public class DeathScreenMixin extends Screen {
-    @Shadow @Final private List<Button> exitButtons;
-
+@SuppressWarnings("ConstantConditions")
+public abstract class DeathScreenMixin extends Screen {
+    @Shadow
+    @Final
+    private List<Button> exitButtons;
     protected DeathScreenMixin(Component component) {
         super(component);
     }
@@ -40,18 +42,25 @@ public class DeathScreenMixin extends Screen {
     @Inject(
             method = "init",
             at = @At(
-                    value = "INVOKE",
+                    value = "FIELD",
                     shift = At.Shift.BEFORE,
-                    target = "net/minecraft/client/gui/components/Button.<init>(IIIILnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)V"
+                    target = "net/minecraft/client/gui/screens/DeathScreen.exitButtons : Ljava/util/List;",
+                    ordinal = 2
             )
     )
     protected void init(CallbackInfo ci){
-        assert minecraft != null;
-        assert minecraft.player != null;
-        String xyz =  minecraft.player.blockPosition().getX() + " / " + minecraft.player.blockPosition().getY() + " / " + minecraft.player.blockPosition().getZ();
+        String xyz =  this.minecraft.player.blockPosition().getX() + " / " + minecraft.player.blockPosition().getY() + " / " + minecraft.player.blockPosition().getZ();
         this.exitButtons.add(
                 this.addRenderableWidget(
-                        new Button(this.width / 2 - 100, this.height / 4 + 120, 200, 20, Component.literal("Copy Location To Clipboard"),
-                        (buttonx) -> this.minecraft.keyboardHandler.setClipboard(xyz))));
+                        new Button.Builder(
+                                Component.translatable("Copy Location To Clipboard"),
+                                button -> this.minecraft.keyboardHandler.setClipboard(xyz)
+                        ).bounds(
+                                this.width / 2 - 100, this.height / 4 + 120, 200, 20
+                        ).build()
+                )
+        );
     }
+
+
 }
