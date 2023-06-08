@@ -6,10 +6,10 @@ name: Upload Artifacts and Optionally Publish on Curseforge & Modrinth
 on: [ push ]
 
 env:
-  MINECRAFT_VERSION: 1.19.4
+  #MINECRAFT_VERSION: 1.20.0
   JAVA_VERSION: 17
-  VERSION: fabric-1.19.4+1.1.1
-  RELEASE_NAME: Where-Is-My-Stuff-1.1.1+1.19.4
+  VERSION: fabric-1.20.4+1.1.2
+  RELEASE_NAME: Where-Is-My-Stuff-1.1.2+1.20
   MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
   CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
 
@@ -49,7 +49,7 @@ jobs:
 
       - name: Publish (CurseForge/Modrinth/Github)
         if: "contains(github.event.head_commit.message, 'ACTION_RELEASE')"
-        uses: Kir-Antipov/mc-publish@v3.2
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           curseforge-id: 527997
           curseforge-token: "${{env.CURSEFORGE_TOKEN}}"

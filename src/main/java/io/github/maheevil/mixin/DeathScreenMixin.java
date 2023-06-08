@@ -1,6 +1,7 @@
 package io.github.maheevil.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.DeathScreen;
 import net.minecraft.client.gui.screens.Screen;
@@ -29,14 +30,14 @@ public abstract class DeathScreenMixin extends Screen {
             at = @At(
                     value = "INVOKE",
                     shift = At.Shift.BEFORE,
-                    target = "net/minecraft/client/gui/screens/Screen.render(Lcom/mojang/blaze3d/vertex/PoseStack;IIF)V"
+                    target = "net/minecraft/client/gui/screens/Screen.render (Lnet/minecraft/client/gui/GuiGraphics;IIF)V"
             )
     )
-    public void render(PoseStack poseStack, int i, int j, float f, CallbackInfo ci){
+    public void render(GuiGraphics guiGraphics, int i, int j, float f, CallbackInfo ci){
         assert this.minecraft != null;
         assert this.minecraft.player != null;
         String xyz = "[X: " + minecraft.player.blockPosition().getX() + "/ Y: " + minecraft.player.blockPosition().getY() + "/ Z: " + minecraft.player.blockPosition().getZ() + "]";
-        drawCenteredString(poseStack,this.font, xyz, this.width / 2, this.height / 4 + 145, 16777215);
+        guiGraphics.drawCenteredString(this.font, xyz, this.width / 2, this.height / 4 + 145, 16777215);
     }
 
     @Inject(
@@ -53,7 +54,7 @@ public abstract class DeathScreenMixin extends Screen {
         this.exitButtons.add(
                 this.addRenderableWidget(
                         new Button.Builder(
-                                Component.translatable("Copy Location To Clipboard"),
+                                Component.literal("Copy Location To Clipboard"),
                                 button -> this.minecraft.keyboardHandler.setClipboard(xyz)
                         ).bounds(
                                 this.width / 2 - 100, this.height / 4 + 120, 200, 20
