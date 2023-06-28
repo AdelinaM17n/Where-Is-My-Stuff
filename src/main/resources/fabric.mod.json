@@ -9,7 +9,7 @@
     "Maheesha"
   ],
   "contact": {
-    "homepage": "",
+    "homepage": "https://github.com/MaheEvil/Where-Is-My-Stuff",
     "sources": "https://github.com/MaheEvil/Where-Is-My-Stuff"
   },
 
@@ -30,8 +30,5 @@
     "fabricloader": ">=0.14.1",
     "minecraft": ">1.19.4",
     "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "CutefulMod by SRAZKVT"
   }
 }
