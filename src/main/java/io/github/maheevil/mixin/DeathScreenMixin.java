@@ -50,7 +50,7 @@ public abstract class DeathScreenMixin extends Screen {
             )
     )
     protected void init(CallbackInfo ci){
-        String xyz =  this.minecraft.player.blockPosition().getX() + " / " + minecraft.player.blockPosition().getY() + " / " + minecraft.player.blockPosition().getZ();
+        String xyz =  this.minecraft.player.blockPosition().getX() + " " + minecraft.player.blockPosition().getY() + " " + minecraft.player.blockPosition().getZ();
         this.exitButtons.add(
                 this.addRenderableWidget(
                         new Button.Builder(
