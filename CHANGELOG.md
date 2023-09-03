@@ -1,1 +1,1 @@
-- Fixes the mod crashing on quilt
+- Removed the slashes so you can use the cords for TPing
