@@ -36,7 +36,7 @@ public abstract class DeathScreenMixin extends Screen {
     public void render(GuiGraphics guiGraphics, int i, int j, float f, CallbackInfo ci){
         assert this.minecraft != null;
         assert this.minecraft.player != null;
-        String xyz = "[X: " + minecraft.player.blockPosition().getX() + "/ Y: " + minecraft.player.blockPosition().getY() + "/ Z: " + minecraft.player.blockPosition().getZ() + "]";
+        String xyz = "[X: " + minecraft.player.blockPosition().getX() + " Y: " + minecraft.player.blockPosition().getY() + " Z: " + minecraft.player.blockPosition().getZ() + "]";
         guiGraphics.drawCenteredString(this.font, xyz, this.width / 2, this.height / 4 + 145, 16777215);
     }
 
@@ -50,7 +50,7 @@ public abstract class DeathScreenMixin extends Screen {
             )
     )
     protected void init(CallbackInfo ci){
-        String xyz =  this.minecraft.player.blockPosition().getX() + " / " + minecraft.player.blockPosition().getY() + " / " + minecraft.player.blockPosition().getZ();
+        String xyz =  this.minecraft.player.blockPosition().getX() + " " + minecraft.player.blockPosition().getY() + " " + minecraft.player.blockPosition().getZ();
         this.exitButtons.add(
                 this.addRenderableWidget(
                         new Button.Builder(
