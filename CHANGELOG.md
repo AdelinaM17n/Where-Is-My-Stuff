@@ -1,1 +1,2 @@
-- Removed the slashes so you can use the cords for TPing
+- 1.21.4
+- Updated the copy to clipboard button behaviour, the button text will be changed to "Copied Location To Clip" and deactivated upon use.

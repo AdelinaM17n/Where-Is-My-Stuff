@@ -55,7 +55,11 @@ public abstract class DeathScreenMixin extends Screen {
                 this.addRenderableWidget(
                         new Button.Builder(
                                 Component.literal("Copy Location To Clipboard"),
-                                button -> this.minecraft.keyboardHandler.setClipboard(xyz)
+                                button -> {
+                                    this.minecraft.keyboardHandler.setClipboard(xyz);
+                                    button.setMessage(Component.literal("Location Copied To Clipboard"));
+                                    button.active = false;
+                                }
                         ).bounds(
                                 this.width / 2 - 100, this.height / 4 + 120, 200, 20
                         ).build()
